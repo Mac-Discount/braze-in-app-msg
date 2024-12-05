@@ -267,6 +267,7 @@
         min-width: inherit;
         height: inherit;
         flex: 1 0 100%;
+        background-color: rgb(51, 77, 145);
         background-repeat: no-repeat;
         background-size: contain;
         scroll-snap-align: start; /* Snap each image to the start of the scroll area */
@@ -317,34 +318,36 @@
         top: 55.5%;
       }
 
+      .top-savings-images-container {
+        width: 92%;
+        display: flex;
+        flex-direction: row;
+        justify-content: center;
+        align-items: center;
+        gap: 20px;
+        position: absolute;
+        top: 58%;
+        left: 50%;
+        transform: translate(-50%, -50%);
+      }
+      .top-savings-left-col,
+      .top-savings-right-col {
+        display: flex;
+        flex-direction: column;
+        justify-content: center;
+        align-items: center;
+        gap: 15px;
+      }
+
       .top-savings-item {
+        width: 100%;
         aspect-ratio: 1;
       }
-      .top-savings-item[data-item-id="1"],
-      .top-savings-item[data-item-id="2"] {
-        width: 45%;
-        left: 20px;
+      .top-savings-left-col .top-savings-item {
+        max-height: 215px;
       }
-      .top-savings-item[data-item-id="1"] {
-        top: 42%;
-      }
-      .top-savings-item[data-item-id="2"] {
-        top: 70%;
-      }
-      .top-savings-item[data-item-id="3"],
-      .top-savings-item[data-item-id="4"],
-      .top-savings-item[data-item-id="5"] {
-        width: 37%;
-        right: 20px;
-      }
-      .top-savings-item[data-item-id="3"] {
-        top: 32%;
-      }
-      .top-savings-item[data-item-id="4"] {
-        top: 54%;
-      }
-      .top-savings-item[data-item-id="5"] {
-        top: 76%;
+      .top-savings-right-col .top-savings-item {
+        max-height: 135px;
       }
 
       .chart-background {
@@ -472,6 +475,9 @@
         right: 30px;
         outline: 10px solid var(--gold);
       }
+      #best-bid img {
+        position: absolute;
+      }
 
       .gold-circle {
         width: 150px;
@@ -553,7 +559,6 @@
         height: 100%;
         object-fit: contain;
         background-color: #fff;
-        position: absolute;
       }
 
       sup {
@@ -675,20 +680,40 @@
 
             <!-- Image 3 -->
             <div class="carousel-item" data-index="3">
-              <div data-item-id="1" class="content-wrapper top-savings-item">
-                <img src="{{custom_attribute.${2024_savings_1_image}}}" alt="null" />
-              </div>
-              <div data-item-id="2" class="content-wrapper top-savings-item">
-                <img src="{{custom_attribute.${2024_savings_2_image}}}" alt="null" />
-              </div>
-              <div data-item-id="3" class="content-wrapper top-savings-item">
-                <img src="{{custom_attribute.${2024_savings_3_image}}}" alt="null" />
-              </div>
-              <div data-item-id="4" class="content-wrapper top-savings-item">
-                <img src="{{custom_attribute.${2024_savings_4_image}}}_image}}}" alt="null" />
-              </div>
-              <div data-item-id="5" class="content-wrapper top-savings-item">
-                <img src="{{custom_attribute.${2024_savings_5_image}}}" alt="null" />
+              <div class="top-savings-images-container">
+                <div class="top-savings-left-col">
+{% if custom_attribute.${2024_savings_1_image} != blank %}
+                  <div data-item-id="1" class="top-savings-item">
+                    <img src="{{custom_attribute.${2024_savings_1_image}}}" alt="null" />
+                  </div>
+
+{% endif %}
+{% if custom_attribute.${2024_savings_2_image} != blank %}
+                  <div data-item-id="2" class="top-savings-item">
+                    <img src="{{custom_attribute.${2024_savings_2_image}}}" alt="null" />
+                  </div>
+
+{% endif %}
+                </div>
+                <div class="top-savings-right-col">
+{% if custom_attribute.${2024_savings_3_image} != blank %}
+                  <div data-item-id="3" class="top-savings-item">
+                    <img src="{{custom_attribute.${2024_savings_3_image}}}" alt="null" />
+                  </div>
+
+{% endif %}
+{% if custom_attribute.${2024_savings_4_image} != blank %}
+                  <div data-item-id="4" class="top-savings-item">
+                    <img src="{{custom_attribute.${2024_savings_4_image}}}_image}}}" alt="null" />
+                  </div>
+{% endif %}
+{% if custom_attribute.${2024_savings_5_image} != blank %}
+                  <div data-item-id="5" class="top-savings-item">
+                    <img src="{{custom_attribute.${2024_savings_5_image}}}" alt="null" />
+                  </div>
+
+{% endif %}
+                </div>
               </div>
             </div>
 
