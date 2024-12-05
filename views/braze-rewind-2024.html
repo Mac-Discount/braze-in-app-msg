@@ -1,0 +1,896 @@
+<!DOCTYPE html>
+<html>
+  <head>
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <meta http-equiv="X-UA-Compatible" content="IE=edge" />
+    <!-- <link rel="preconnect" href="https://fonts.googleapis.com" />
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin /> -->
+    <link
+      href="https://fonts.googleapis.com/css2?family=Rubik:ital,wght@0,300..900;1,300..900&display=swap"
+      rel="stylesheet"
+    />
+    <style type="text/css">
+      /* CSS Resets */
+      /* http://meyerweb.com/eric/tools/css/reset/
+        v5.0.1 | 20191019
+        License: none (public domain)
+      */
+
+      html,
+      body,
+      div,
+      span,
+      applet,
+      object,
+      iframe,
+      h1,
+      h2,
+      h3,
+      h4,
+      h5,
+      h6,
+      p,
+      blockquote,
+      pre,
+      a,
+      abbr,
+      acronym,
+      address,
+      big,
+      cite,
+      code,
+      del,
+      dfn,
+      em,
+      img,
+      ins,
+      kbd,
+      q,
+      s,
+      samp,
+      small,
+      strike,
+      strong,
+      sub,
+      sup,
+      tt,
+      var,
+      b,
+      u,
+      i,
+      center,
+      dl,
+      dt,
+      dd,
+      menu,
+      ol,
+      ul,
+      li,
+      fieldset,
+      form,
+      label,
+      legend,
+      table,
+      caption,
+      tbody,
+      tfoot,
+      thead,
+      tr,
+      th,
+      td,
+      article,
+      aside,
+      canvas,
+      details,
+      embed,
+      figure,
+      figcaption,
+      footer,
+      header,
+      hgroup,
+      main,
+      menu,
+      nav,
+      output,
+      ruby,
+      section,
+      summary,
+      time,
+      mark,
+      audio,
+      video {
+        margin: 0;
+        padding: 0;
+        border: 0;
+        font-size: 100%;
+        font: inherit;
+        vertical-align: baseline;
+      }
+      /* HTML5 display-role reset for older browsers */
+      article,
+      aside,
+      details,
+      figcaption,
+      figure,
+      footer,
+      header,
+      hgroup,
+      main,
+      menu,
+      nav,
+      section {
+        display: block;
+      }
+      /* HTML5 hidden-attribute fix for newer browsers */
+      *[hidden] {
+        display: none;
+      }
+      body {
+        line-height: 1;
+      }
+      menu,
+      ol,
+      ul {
+        list-style: none;
+      }
+      blockquote,
+      q {
+        quotes: none;
+      }
+      blockquote:before,
+      blockquote:after,
+      q:before,
+      q:after {
+        content: "";
+        content: none;
+      }
+      table {
+        border-collapse: collapse;
+        border-spacing: 0;
+      }
+
+      /* DEV UTILITIES */
+      .inspect {
+        box-shadow: inset 0 0 0 1px red;
+      }
+
+      /* GLOBAL STYLES */
+      :root {
+        --message-max-width: 400px;
+        --green: rgb(140, 175, 61);
+        --gold: rgb(235, 192, 47);
+        --red: rgb(217, 71, 91);
+        --blue: rgb(103, 168, 222);
+        --chart-line-white: rgba(255, 255, 255, 0.2);
+      }
+      * {
+        font-family: "Rubik", sans-serif !important;
+        font-weight: 500 !important;
+        letter-spacing: -0.035em;
+        color: #fff;
+      }
+
+      /* UTILITY CLASSES  */
+      .text-center {
+        text-align: center;
+      }
+      .text-right {
+        text-align: right;
+      }
+      .uppercase {
+        text-transform: uppercase;
+      }
+      .bg-green {
+        background-color: var(--green);
+      }
+      .bg-gold {
+        background-color: var(--gold);
+      }
+      .bg-red {
+        background-color: var(--red);
+      }
+      .bg-blue {
+        background-color: var(--blue);
+      }
+
+      /* LAYOUT STYLES */
+      body {
+        width: 100vw;
+        height: 100vh;
+        position: relative;
+        background-color: rgba(0, 0, 0, 0.8);
+      }
+
+      #message-container {
+        height: 100vh;
+        max-width: var(--message-max-width);
+        max-height: 98vh; /* Keeps image from overflowing the browser on mobile */
+        aspect-ratio: 375/667;
+        position: absolute;
+        top: 50%;
+        left: 50%;
+        transform: translate(-50%, -50%);
+        display: flex;
+        flex-direction: column;
+        justify-content: center;
+        align-items: center;
+      }
+
+      #content-container {
+        width: 100%;
+        aspect-ratio: 375/667;
+        position: relative;
+      }
+
+      header {
+        width: calc(100% - 23px);
+        display: flex;
+        justify-content: flex-end;
+        align-items: center;
+        position: absolute;
+        top: 3px;
+        left: 50%;
+        transform: translateX(-50%);
+        z-index: 1;
+      }
+
+      nav {
+        width: max-content;
+      }
+
+      .close-button {
+        font-size: 2rem;
+        font-weight: 300 !important;
+        text-decoration: none;
+      }
+
+      main {
+        width: 100%;
+        height: 100%;
+      }
+
+      #carousel {
+        width: inherit;
+        height: inherit;
+        display: flex;
+        flex-direction: row;
+        /* justify-content: center; */
+        /* align-items: center; */
+        /* overflow-y: hidden; */
+        overflow-x: auto; /* Allow horizontal scrolling */
+        scroll-snap-type: x mandatory; /* Enable horizontal snapping */
+        -webkit-overflow-scrolling: touch; /* Smooth scrolling for mobile devices */
+        /* direction: rtl; Reverse scroll direction */
+      }
+
+      .carousel-item {
+        min-width: inherit;
+        height: inherit;
+        flex: 1 0 100%;
+        background-repeat: no-repeat;
+        background-size: contain;
+        scroll-snap-align: start; /* Snap each image to the start of the scroll area */
+        position: sticky;
+        left: 0;
+        /* box-shadow: inset 0 0 0 1px red; */
+      }
+      .carousel-item[data-index="1"] {
+        background-image: url("rewind_2024_1.png");
+      }
+      .carousel-item[data-index="2"] {
+        background-image: url("rewind_2024_2.png");
+      }
+      .carousel-item[data-index="3"] {
+        background-image: url("rewind_2024_3.png");
+      }
+      .carousel-item[data-index="4"] {
+        background-image: url("rewind_2024_4.png");
+      }
+      .carousel-item[data-index="5"] {
+        background-image: url("rewind_2024_5.png");
+      }
+      .carousel-item[data-index="6"] {
+        background-image: url("rewind_2024_6.png");
+      }
+      .carousel-item[data-index="7"] {
+        background-image: url("rewind_2024_7.png");
+      }
+      .carousel-item[data-index="8"] {
+        background-image: url("rewind_2024_8.png");
+      }
+      .carousel-item[data-index="9"] {
+        background-image: url("rewind_2024_9.png");
+      }
+
+      .content-wrapper {
+        width: max-content;
+        position: absolute;
+        transform: translateY(-50%);
+      }
+
+      #percentile-bidders {
+        right: 15px;
+        top: 31%;
+      }
+      #dollars-saved {
+        left: 15px;
+        top: 55.5%;
+      }
+
+      .top-savings-item {
+        aspect-ratio: 1;
+      }
+      .top-savings-item[data-item-id="1"],
+      .top-savings-item[data-item-id="2"] {
+        width: 45%;
+        left: 20px;
+      }
+      .top-savings-item[data-item-id="1"] {
+        top: 42%;
+      }
+      .top-savings-item[data-item-id="2"] {
+        top: 70%;
+      }
+      .top-savings-item[data-item-id="3"],
+      .top-savings-item[data-item-id="4"],
+      .top-savings-item[data-item-id="5"] {
+        width: 37%;
+        right: 20px;
+      }
+      .top-savings-item[data-item-id="3"] {
+        top: 32%;
+      }
+      .top-savings-item[data-item-id="4"] {
+        top: 54%;
+      }
+      .top-savings-item[data-item-id="5"] {
+        top: 76%;
+      }
+
+      .chart-background {
+        border-bottom: 1px solid white;
+        background: linear-gradient(
+          to top,
+          transparent 0%,
+          transparent calc(25% - 0.5px),
+          var(--chart-line-white) calc(25% - 0.5px),
+          var(--chart-line-white) calc(25% + 0.5px),
+          transparent calc(25% + 0.5px),
+          transparent calc(50% - 0.5px),
+          var(--chart-line-white) calc(50% - 0.5px),
+          var(--chart-line-white) calc(50% + 0.5px),
+          transparent calc(50% + 0.5px),
+          transparent calc(75% - 0.5px),
+          var(--chart-line-white) calc(75% - 0.5px),
+          var(--chart-line-white) calc(75% + 0.5px),
+          transparent calc(75% + 0.5px),
+          transparent calc(100% - 0.5px),
+          var(--chart-line-white) calc(100% - 0.5px),
+          var(--chart-line-white) calc(100% + 0.5px),
+          transparent calc(100% + 0.5px)
+        );
+      }
+
+      #win-loss-chart {
+        bottom: 107px;
+        left: 50.6%;
+        transform: translateX(-50%);
+      }
+
+      #category-chart {
+        top: 41%;
+        left: 15px;
+      }
+
+      .graph-wrapper.vertical {
+        display: flex;
+        flex-direction: row;
+        justify-content: center;
+        align-items: flex-end;
+        gap: 10px;
+      }
+      .graph-wrapper.horizontal {
+        display: flex;
+        flex-direction: column;
+        justify-content: center;
+        align-items: flex-start;
+        gap: 25px;
+      }
+
+      #win-loss-chart .graph-wrapper {
+        width: 325px;
+        height: 300px;
+        padding: 0 4px;
+      }
+
+      #category-chart .graph-wrapper {
+        width: 305px;
+        height: 170px;
+        aspect-ratio: 2/1;
+      }
+
+      .chart-bar {
+        position: relative;
+      }
+      .chart-bar.vertical {
+        width: 100%;
+        border-top-left-radius: 13px;
+        border-top-right-radius: 13px;
+      }
+      .chart-bar.horizontal {
+        height: 100%;
+        max-height: 24px;
+        border-top-right-radius: 13px;
+        border-bottom-right-radius: 13px;
+      }
+
+      .bid-win-loss-count {
+        position: absolute;
+        top: -22px;
+        left: 50%;
+        transform: translateX(-50%);
+      }
+
+      .category-name {
+        width: max-content;
+        position: absolute;
+        top: calc(100% + 3px);
+        left: 0;
+        font-size: 14px;
+        font-weight: 300 !important;
+      }
+
+      .category-count {
+        position: absolute;
+        right: -30px;
+        top: 50%;
+        transform: translateY(-50%);
+        font-weight: 300 !important;
+      }
+
+      #dollar-bids {
+        left: 17%;
+        top: 33%;
+      }
+      #percent-wins {
+        right: 13%;
+        top: 33%;
+      }
+      #most-bids-on-item {
+        left: 20px;
+        top: 56%;
+      }
+      #unique-bids {
+        left: 10%;
+        bottom: 7%;
+      }
+
+      #best-bid {
+        aspect-ratio: 1;
+        width: 71%;
+        top: 45%;
+        right: 30px;
+        outline: 10px solid var(--gold);
+      }
+
+      .gold-circle {
+        width: 150px;
+        aspect-ratio: 1;
+        position: absolute;
+        top: -50px;
+        left: -150px;
+        transform: translateX(50%);
+        display: flex;
+        flex-direction: column;
+        justify-content: center;
+        align-items: center;
+        text-align: center;
+        background-image: url("gold-circle.png");
+        background-size: cover;
+        background-repeat: no-repeat;
+      }
+      .gold-circle p {
+        font-size: 40px;
+        margin-top: 20px;
+        margin-left: -5px;
+      }
+
+      .green-circle {
+        width: 140px;
+        aspect-ratio: 1;
+        position: absolute;
+        bottom: -55px;
+        right: -15px;
+        display: flex;
+        flex-direction: column;
+        justify-content: center;
+        align-items: center;
+        text-align: center;
+        background-image: url("green-circle.png");
+        background-size: cover;
+        background-repeat: no-repeat;
+      }
+      .green-circle p {
+        font-size: 40px;
+        margin-top: 25px;
+        margin-left: -5px;
+      }
+
+      #top-bidding-day {
+        left: 50%;
+        transform: translateX(-50%);
+        bottom: 12%;
+      }
+
+      #top-warehouses {
+        left: 20px;
+        top: 43%;
+      }
+
+      #social-button-wrapper {
+        display: flex;
+        flex-direction: row;
+        justify-content: center;
+        align-items: center;
+        position: absolute;
+        bottom: 7px;
+        left: 52.5%;
+        transform: translateX(-50%);
+      }
+      .social-button {
+        display: block;
+        width: 45px;
+        aspect-ratio: 1;
+      }
+
+      /* CONTENT STYLES */
+      p {
+        margin-bottom: 0;
+      }
+
+      img {
+        width: 100%;
+        height: 100%;
+        object-fit: contain;
+        background-color: #fff;
+        position: absolute;
+      }
+
+      sup {
+        font-size: 0.5em;
+        vertical-align: 0.7em;
+      }
+
+      .data {
+        font-size: 75px;
+        line-height: 1em;
+      }
+
+      .caption {
+        font-size: 30px;
+        line-height: 1.1em;
+        letter-spacing: -0.01em;
+      }
+      [data-index="6"] .data {
+        font-size: 60px;
+        line-height: 1.1em;
+      }
+      [data-index="6"] .caption {
+        font-size: 18px;
+        line-height: 1.1em;
+      }
+
+      #top-bidding-day .caption {
+        font-size: 20px;
+      }
+
+      #top-warehouses p {
+        font-size: 40px;
+        font-weight: 700 !important;
+        line-height: 1.1em;
+        margin-bottom: 15px;
+      }
+
+      .svg-text {
+        display: flex;
+        justify-content: center;
+        align-items: center;
+        margin: 20px;
+      }
+
+      #progress-bar {
+        width: 90%;
+        height: 15px;
+        padding: 0 5px;
+        background-color: var(--pink);
+        position: absolute;
+        top: 55%;
+        left: 0;
+        transform: translateY(-50%);
+        display: flex;
+        justify-content: space-around;
+        align-items: center;
+        gap: 8px;
+        background-color: #fff;
+        overflow: hidden;
+      }
+
+      .progress-token {
+        width: 100%;
+        height: 40%;
+        /* background-color: var(--gold); */
+        background-color: var(--green);
+        transition: all 0.25s;
+        /* transition: transform 0.6s; */
+        /* transform: translateX(0); */
+      }
+      /* .progress-token:nth-child(2) {
+        background-color: var(--green);
+        transform: translateX(375px);
+      } */
+    </style>
+  </head>
+
+  <body>
+    <div id="message-container">
+      <div id="content-container">
+        <header>
+          <nav>
+            <a
+              onclick="brazeBridge.logClick('Close Rewind 2024');brazeBridge.closeMessage()"
+              href="#"
+              class="close-button"
+              >&times;</a
+            >
+          </nav>
+          <div id="progress-bar">
+            <div class="progress-token"></div>
+            <!-- <div class="progress-token" style="opacity: 0.4; background-color: var(--gold)"></div> -->
+            <div class="progress-token" style="transform: translateX(375px)" data-index="2"></div>
+            <div class="progress-token" style="transform: translateX(375px)" data-index="3"></div>
+            <div class="progress-token" style="transform: translateX(375px)" data-index="4"></div>
+            <div class="progress-token" style="transform: translateX(375px)" data-index="5"></div>
+            <div class="progress-token" style="transform: translateX(375px)" data-index="6"></div>
+            <div class="progress-token" style="transform: translateX(375px)" data-index="7"></div>
+            <div class="progress-token" style="transform: translateX(375px)" data-index="8"></div>
+            <div class="progress-token" style="transform: translateX(375px)" data-index="9"></div>
+          </div>
+        </header>
+        <main>
+          <div id="carousel">
+            <!-- Landing image -->
+            <div class="carousel-item" data-index="1"></div>
+
+            <!-- Image 2 -->
+            <div class="carousel-item" data-index="2">
+              <div id="percentile-bidders" class="content-wrapper text-right">
+                <p class="data uppercase">TOP 3</p>
+                <p class="caption uppercase">PERCENTILE IN<br />BIDDERS</p>
+              </div>
+              <div id="dollars-saved" class="content-wrapper">
+                <p class="data uppercase"><sup>$</sup>{{custom_attribute.${2024_dollars_saved}}}</p>
+                <p class="caption uppercase">Dollars<br />Saved</p>
+              </div>
+            </div>
+
+            <!-- Image 3 -->
+            <div class="carousel-item" data-index="3">
+              <div data-item-id="1" class="content-wrapper top-savings-item">
+                <img src="{{custom_attribute.${2024_savings_1_image}}}" alt="null" />
+              </div>
+              <div data-item-id="2" class="content-wrapper top-savings-item">
+                <img src="{{custom_attribute.${2024_savings_2_image}}}" alt="null" />
+              </div>
+              <div data-item-id="3" class="content-wrapper top-savings-item">
+                <img src="{{custom_attribute.${2024_savings_3_image}}}" alt="null" />
+              </div>
+              <div data-item-id="4" class="content-wrapper top-savings-item">
+                <img src="{{custom_attribute.${2024_savings_4_image}}}_image}}}" alt="null" />
+              </div>
+              <div data-item-id="5" class="content-wrapper top-savings-item">
+                <img src="{{custom_attribute.${2024_savings_5_image}}}" alt="null" />
+              </div>
+            </div>
+
+            <!-- Image 4 -->
+            <div class="carousel-item" data-index="4">
+              <div id="win-loss-chart" class="content-wrapper">
+                <div class="graph-wrapper vertical chart-background">
+                  <div id="items-won" class="chart-bar vertical bg-green">
+                    <span class="bid-win-loss-count">{{ custom_attribute.${2024_items_won} }}</span>
+                  </div>
+                  <div id="items-lost" class="chart-bar vertical bg-gold">
+                    <span class="bid-win-loss-count">{{ custom_attribute.${2024_items_lost} }}</span>
+                  </div>
+                </div>
+              </div>
+            </div>
+
+            <!-- Image 5 -->
+            <div class="carousel-item" data-index="5">
+              <div id="category-chart" class="content-wrapper">
+                <div class="graph-wrapper horizontal">
+                  <div class="chart-bar horizontal bg-green" style="width: 100%">
+                    <span class="category-name">{{ custom_attribute.${2024_category_1_name} }}</span>
+                    <span class="category-count">{{ custom_attribute.${2024_category_1_wins} }}</span>
+                  </div>
+
+{% if custom_attribute.${2024_category_2_wins} != blank %}
+                  <div class="chart-bar horizontal bg-gold" style="width: calc(( {{ custom_attribute.${2024_category_2_wins} }} / {{ custom_attribute.${2024_category_1_wins} }} ) * 100%)">
+                    <span class="category-name">{{ custom_attribute.${2024_category_2_name} }}</span>
+                    <span class="category-count">{{ custom_attribute.${2024_category_2_wins} }}</span>
+                  </div>
+
+{% endif %}
+{% if custom_attribute.${2024_category_3_wins} != blank %}
+                  <div class="chart-bar horizontal bg-red" style="width: calc(( {{ custom_attribute.${2024_category_3_wins} }} / {{ custom_attribute.${2024_category_1_wins} }} ) * 100%)">
+                    <span class="category-name">{{ custom_attribute.${2024_category_3_name} }}</span>
+                    <span class="category-count">{{ custom_attribute.${2024_category_3_wins} }}</span>
+                  </div>
+
+{% endif %}
+{% if custom_attribute.${2024_category_4_wins} != blank %}
+                  <div class="chart-bar horizontal bg-blue" style="width: calc(( {{ custom_attribute.${2024_category_4_wins} }} / {{ custom_attribute.${2024_category_1_wins} }} ) * 100%)">
+                    <span class="category-name">{{ custom_attribute.${2024_category_4_name} }}</span>
+                    <span class="category-count">{{ custom_attribute.${2024_category_4_wins} }}</span>
+                  </div>
+
+{% endif %}
+                </div>
+              </div>
+            </div>
+
+            <!-- Image 6 -->
+            <div class="carousel-item" data-index="6">
+              <div id="dollar-bids" class="content-wrapper text-center">
+                <p class="data uppercase">{{ custom_attribute.${2024_dollar_items_won} }}</p>
+                <p class="caption uppercase">$1 WINS</p>
+              </div>
+              <div id="percent-wins" class="content-wrapper text-center">
+                <p class="data uppercase">{{ custom_attribute.${2024_win_percentage} }}%</p>
+                <p class="caption uppercase">WINNINGS</p>
+              </div>
+              <div id="most-bids-on-item" class="content-wrapper text-center">
+                <p class="data uppercase">{{ custom_attribute.${2024_most_bids_on_single_lot} }}</p>
+                <p class="caption uppercase">MOST BIDS<br />PLACED ON A<br />SINGLE ITEM</p>
+              </div>
+              <div id="unique-bids" class="content-wrapper text-center">
+                <p class="data uppercase">{{ custom_attribute.${2024_unique_bid_items} }}</p>
+                <p class="caption uppercase">UNIQUE BIDS</p>
+              </div>
+            </div>
+
+            <!-- Image 7 -->
+            <div class="carousel-item" data-index="7">
+              <div id="best-bid" class="content-wrapper">
+                <img src="{{custom_attribute.${2024_savings_1_image}}}" alt="null" />
+                <div class="gold-circle">
+                  <p><sup>$</sup>{{custom_attribute.${2024_savings_top_item_retail_price}}}</p>
+                </div>
+                <div class="green-circle">
+                  <p><sup>$</sup>{{custom_attribute.${2024_savings_top_item_win_price}}}</p>
+                </div>
+              </div>
+              <div id="top-bidding-day" class="content-wrapper text-center">
+                <p class="data">Tuesday</p>
+                <p class="caption uppercase">TOP BIDDING DAY</p>
+              </div>
+            </div>
+
+            <!-- Image 8 -->
+            <div class="carousel-item" data-index="8">
+              <div id="top-warehouses" class="content-wrapper">
+                <p>
+                  {{ custom_attribute.${2024_top_1_warehouse} }}
+                </p>
+
+{% if custom_attribute.${2024_top_2_warehouse} != blank %}
+                  <p>
+                    {{ custom_attribute.${2024_top_2_warehouse} }}
+                  </p>
+{% endif %}
+{% if custom_attribute.${2024_top_3_warehouse} != blank %}
+                  <p>
+                    {{ custom_attribute.${2024_top_3_warehouse} }}
+                  </p>
+{% endif %}
+              </div>
+            </div>
+
+            <!-- Image 9 -->
+            <div class="carousel-item" data-index="9">
+              <div id="social-button-wrapper" class="content-wrapper">
+                <a href="#" class="social-button" data-network="facebook"></a>
+                <a href="#" class="social-button" data-network="instagram"></a>
+                <a href="#" class="social-button" data-network="linkedin"></a>
+                <a href="#" class="social-button" data-network="youtube"></a>
+                <a href="#" class="social-button" data-network="tiktok"></a>
+              </div>
+            </div>
+          </div>
+        </main>
+      </div>
+    </div>
+  </body>
+  <script>
+    // Intersection Observer for Image in Viewport
+    const observer = new IntersectionObserver(
+      (entries) => {
+        entries.forEach((entry) => {
+          const slideIndex = entry.target.dataset.index;
+          // console.log("Element is in view:", slideIndex);
+          if (entry.isIntersecting) {
+            document.querySelector(
+              `.progress-token[data-index="${slideIndex}"]`
+            ).style.transform = `translateX(0)`;
+          } else {
+            document.querySelector(
+              `.progress-token[data-index="${slideIndex}"]`
+            ).style.transform = `translateX(375px)`;
+          }
+        });
+      },
+      {
+        root: null,
+        rootMargin: "0px",
+        threshold: 0.5,
+      }
+    );
+
+    const targets = document.querySelectorAll(".carousel-item");
+    targets.forEach((target) => {
+      observer.observe(target);
+    });
+  </script>
+  <script>
+    const items_won = document.getElementById('items-won');
+    const items_lost = document.getElementById('items-lost');
+    // bar chart height calcs for items won/lost
+    if ( {{ custom_attribute.${2024_items_won} }} > {{ custom_attribute.${2024_items_lost} }} ) {
+      items_won.style.height = '100%';
+      items_lost.style.height = 'calc( ( {{ custom_attribute.${2024_items_lost} }} / {{ custom_attribute.${2024_items_won} }} ) * 100% )'
+    }
+    else {
+      items_lost.style.height = '100%';
+      items_won.style.height = 'calc( ( {{ custom_attribute.${2024_items_won} }} / {{ custom_attribute.${2024_items_lost} }} ) * 100% )'
+    };
+  </script>
+  <!-- <script>
+    // Swipe functionality for mobile
+    const carousel = document.getElementById("carousel");
+    const items = document.querySelectorAll(".carousel-item");
+    let currentIndex = 0;
+    let startX = 0;
+    let endX = 0;
+
+    // Handle touch start
+    carousel.addEventListener("touchstart", (event) => {
+      startX = event.touches[0].clientX;
+    });
+
+    // Handle touch move (optional: for feedback, e.g., dragging effect)
+    carousel.addEventListener("touchmove", (event) => {
+      endX = event.touches[0].clientX;
+    });
+
+    // Handle touch end
+    carousel.addEventListener("touchend", () => {
+      const diff = startX - endX;
+
+      if (diff > 50) {
+        // Swipe left
+        if (currentIndex < items.length - 1) {
+          currentIndex++;
+        }
+      } else if (diff < -50) {
+        // Swipe right
+        if (currentIndex > 0) {
+          currentIndex--;
+        }
+      }
+
+      // Update carousel position
+      carousel.style.transform = `translateX(-${currentIndex * 100}%)`;
+    });
+  </script> -->
+</html>
