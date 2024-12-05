@@ -254,13 +254,9 @@
         height: inherit;
         display: flex;
         flex-direction: row;
-        /* justify-content: center; */
-        /* align-items: center; */
-        /* overflow-y: hidden; */
         overflow-x: auto; /* Allow horizontal scrolling */
         scroll-snap-type: x mandatory; /* Enable horizontal snapping */
         -webkit-overflow-scrolling: touch; /* Smooth scrolling for mobile devices */
-        /* direction: rtl; Reverse scroll direction */
       }
 
       .carousel-item {
@@ -273,7 +269,6 @@
         scroll-snap-align: start; /* Snap each image to the start of the scroll area */
         position: sticky;
         left: 0;
-        /* box-shadow: inset 0 0 0 1px red; */
       }
       .carousel-item[data-index="1"] {
         background-image: url("rewind_2024_1.png");
@@ -559,7 +554,6 @@
         height: 100%;
         object-fit: contain;
         background-color: #fff;
-        /* position: absolute; */
       }
 
       sup {
@@ -588,6 +582,7 @@
 
       #top-bidding-day .caption {
         font-size: 20px;
+        margin-top: 8px;
       }
 
       #top-warehouses p {
@@ -624,16 +619,9 @@
       .progress-token {
         width: 100%;
         height: 40%;
-        /* background-color: var(--gold); */
         background-color: var(--green);
         transition: all 0.25s;
-        /* transition: transform 0.6s; */
-        /* transform: translateX(0); */
       }
-      /* .progress-token:nth-child(2) {
-        background-color: var(--green);
-        transform: translateX(375px);
-      } */
     </style>
   </head>
 
@@ -651,14 +639,23 @@
           </nav>
           <div id="progress-bar">
             <div class="progress-token"></div>
-            <!-- <div class="progress-token" style="opacity: 0.4; background-color: var(--gold)"></div> -->
             <div class="progress-token" style="transform: translateX(375px)" data-index="2"></div>
+            <!-- {% if custom_attribute.${2024_savings_1_image} != blank or
+            custom_attribute.${2024_savings_2_image} != blank or
+            custom_attribute.${2024_savings_3_image} != blank or
+            custom_attribute.${2024_savings_4_image} != blank or
+            custom_attribute.${2024_savings_5_image} != blank %} -->
             <div class="progress-token" style="transform: translateX(375px)" data-index="3"></div>
+            <!-- {% endif %} -->
             <div class="progress-token" style="transform: translateX(375px)" data-index="4"></div>
+            <!-- {% if custom_attribute.${2024_category_1_name} != blank %} -->
             <div class="progress-token" style="transform: translateX(375px)" data-index="5"></div>
+            <!-- {% endif %} -->
             <div class="progress-token" style="transform: translateX(375px)" data-index="6"></div>
             <div class="progress-token" style="transform: translateX(375px)" data-index="7"></div>
+            <!-- {% if custom_attribute.${2024_top_1_warehouse} != blank} %} -->
             <div class="progress-token" style="transform: translateX(375px)" data-index="8"></div>
+            <!-- {% endif %} -->
             <div class="progress-token" style="transform: translateX(375px)" data-index="9"></div>
           </div>
         </header>
@@ -674,90 +671,121 @@
                 <p class="caption uppercase">PERCENTILE IN<br />BIDDERS</p>
               </div>
               <div id="dollars-saved" class="content-wrapper">
-                <p class="data uppercase"><sup>$</sup>1300000</p>
+                <p class="data uppercase"><sup>$</sup>2849</p>
                 <p class="caption uppercase">Dollars<br />Saved</p>
               </div>
             </div>
 
             <!-- Image 3 -->
+            <!-- {% if custom_attribute.${2024_savings_1_image} != blank or
+            custom_attribute.${2024_savings_2_image} != blank or
+            custom_attribute.${2024_savings_3_image} != blank or
+            custom_attribute.${2024_savings_4_image} != blank or
+            custom_attribute.${2024_savings_5_image} != blank %} -->
             <div class="carousel-item" data-index="3">
               <div class="top-savings-images-container">
+                <!-- {% if custom_attribute.${2024_savings_1_image} != blank or
+                custom_attribute.${2024_savings_2_image} != blank %} -->
                 <div class="top-savings-left-col">
+                  <!-- {% if custom_attribute.${2024_savings_1_image} != blank %} -->
                   <div data-item-id="1" class="top-savings-item">
                     <img src="top_savings_item_2024_1.jpg" alt="null" />
                   </div>
+                  <!-- {% endif %}  -->
+                  <!-- {% if custom_attribute.${2024_savings_2_image} != blank %} -->
                   <div data-item-id="2" class="top-savings-item">
                     <img src="top_savings_item_2024_2.jpg" alt="null" />
                   </div>
+                  <!-- {% endif %} -->
                 </div>
+                <!-- {% endif %} -->
+                <!-- {% if custom_attribute.${2024_savings_3_image} != blank or
+                custom_attribute.${2024_savings_4_image} != blank or
+                custom_attribute.${2024_savings_5_image} != blank %} -->
                 <div class="top-savings-right-col">
+                  <!-- {% if custom_attribute.${2024_savings_3_image} != blank %} -->
                   <div data-item-id="3" class="top-savings-item">
                     <img src="top_savings_item_2024_3.jpg" alt="null" />
                   </div>
+                  <!-- {% endif %}  -->
+                  <!-- {% if custom_attribute.${2024_savings_4_image} != blank %} -->
                   <div data-item-id="4" class="top-savings-item">
                     <img src="top_savings_item_2024_4.jpg" alt="null" />
                   </div>
+                  <!-- {% endif %}  -->
+                  <!-- {% if custom_attribute.${2024_savings_5_image} != blank %} -->
                   <div data-item-id="5" class="top-savings-item">
                     <img src="top_savings_item_2024_5.jpg" alt="null" />
                   </div>
+                  <!-- {% endif %} -->
                 </div>
+                <!-- {% endif %} -->
               </div>
             </div>
+            <!-- {% endif %} -->
 
             <!-- Image 4 -->
             <div class="carousel-item" data-index="4">
               <div id="win-loss-chart" class="content-wrapper">
                 <div class="graph-wrapper vertical chart-background">
-                  <div class="chart-bar vertical bg-green" style="height: 100%">
-                    <span class="bid-win-loss-count">27</span>
+                  <div id="items-won" class="chart-bar vertical bg-green">
+                    <span class="bid-win-loss-count">13</span>
                   </div>
-                  <div class="chart-bar vertical bg-gold" style="height: calc((17 / 27) * 100%)">
-                    <span class="bid-win-loss-count">17</span>
+                  <div id="items-lost" class="chart-bar vertical bg-gold">
+                    <span class="bid-win-loss-count">26</span>
                   </div>
                 </div>
               </div>
             </div>
 
             <!-- Image 5 -->
+            <!-- {% if custom_attribute.${2024_category_1_name} != blank %} -->
             <div class="carousel-item" data-index="5">
               <div id="category-chart" class="content-wrapper">
                 <div class="graph-wrapper horizontal">
                   <div class="chart-bar horizontal bg-green" style="width: 100%">
-                    <span class="category-name">width: calc( (count/max) * 100 );</span>
-                    <span class="category-count">##</span>
+                    <span class="category-name">Category 1</span>
+                    <span class="category-count">9</span>
                   </div>
-                  <div class="chart-bar horizontal bg-gold" style="width: 75%">
-                    <span class="category-name">width: calc( (count/max) * 100 );</span>
-                    <span class="category-count">##</span>
+                  <!-- {% if custom_attribute.${2024_category_2_wins} != blank %} -->
+                  <div class="chart-bar horizontal bg-gold" style="width: calc((7 / 9) * 100%)">
+                    <span class="category-name">Category 2</span>
+                    <span class="category-count">7</span>
                   </div>
-                  <div class="chart-bar horizontal bg-red" style="width: 90%">
-                    <span class="category-name">width: calc( (count/max) * 100 );</span>
-                    <span class="category-count">##</span>
+                  <!-- {% endif %}  -->
+                  <!-- {% if custom_attribute.${2024_category_3_wins} != blank %} -->
+                  <div class="chart-bar horizontal bg-red" style="width: calc((6 / 9) * 100%)">
+                    <span class="category-name">Category 3</span>
+                    <span class="category-count">6</span>
                   </div>
-                  <div class="chart-bar horizontal bg-blue" style="width: 50%">
-                    <span class="category-name">width: calc( (count/max) * 100 );</span>
-                    <span class="category-count">##</span>
+                  <!-- {% endif %}  -->
+                  <!-- {% if custom_attribute.${2024_category_4_wins} != blank %} -->
+                  <div class="chart-bar horizontal bg-blue" style="width: calc((4 / 9) * 100%)">
+                    <span class="category-name">Category 4</span>
+                    <span class="category-count">4</span>
                   </div>
+                  <!-- {% endif %} -->
                 </div>
               </div>
             </div>
+            <!-- {% endif %} -->
 
             <!-- Image 6 -->
             <div class="carousel-item" data-index="6">
               <div id="dollar-bids" class="content-wrapper text-center">
-                <p class="data uppercase">15</p>
+                <p class="data uppercase">9</p>
                 <p class="caption uppercase">$1 WINS</p>
               </div>
               <div id="percent-wins" class="content-wrapper text-center">
-                <p class="data uppercase">15%</p>
+                <p class="data uppercase">14%</p>
                 <p class="caption uppercase">WINNINGS</p>
               </div>
               <div id="most-bids-on-item" class="content-wrapper text-center">
-                <p class="data uppercase">800</p>
+                <p class="data uppercase">294</p>
                 <p class="caption uppercase">MOST BIDS<br />PLACED ON A<br />SINGLE ITEM</p>
               </div>
               <div id="unique-bids" class="content-wrapper text-center">
-                <p class="data uppercase">27</p>
+                <p class="data uppercase">48</p>
                 <p class="caption uppercase">UNIQUE BIDS</p>
               </div>
             </div>
@@ -765,28 +793,38 @@
             <!-- Image 7 -->
             <div class="carousel-item" data-index="7">
               <div id="best-bid" class="content-wrapper">
-                <img src="top_savings_item_2024_6.jpg" alt="null" />
+                <!-- {% if custom_attribute.${2024_savings_1_image} != blank %} -->
+                <!-- <img src="{{custom_attribute.${2024_savings_1_image}}}" alt="null" /> -->
+                <!-- {% else %} -->
+                <img src="macbid_logo.png" alt="null" />
+                <!-- {% endif %} -->
                 <div class="gold-circle">
-                  <p><sup>$</sup>1200</p>
+                  <p><sup>$</sup>1234</p>
                 </div>
                 <div class="green-circle">
-                  <p><sup>$</sup>1200</p>
+                  <p><sup>$</sup>12</p>
                 </div>
               </div>
               <div id="top-bidding-day" class="content-wrapper text-center">
-                <p class="data">Tuesday</p>
+                <p class="data">Friday</p>
                 <p class="caption uppercase">TOP BIDDING DAY</p>
               </div>
             </div>
 
             <!-- Image 8 -->
+            <!-- {% if custom_attribute.${2024_top_1_warehouse} != blank} %} -->
             <div class="carousel-item" data-index="8">
               <div id="top-warehouses" class="content-wrapper">
                 <p>Colorado Springs</p>
+                <!-- {% if custom_attribute.${2024_top_2_warehouse} != blank %} -->
                 <p>Pittsburgh Mills</p>
+                <!-- {% endif %}  -->
+                <!-- {% if custom_attribute.${2024_top_3_warehouse} != blank %} -->
                 <p>North Las Vegas</p>
+                <!-- {% endif %} -->
               </div>
             </div>
+            <!-- {% endif %} -->
 
             <!-- Image 9 -->
             <div class="carousel-item" data-index="9">
@@ -832,6 +870,31 @@
     targets.forEach((target) => {
       observer.observe(target);
     });
+  </script>
+  <script>
+    const items_won = document.getElementById("items-won");
+    const items_lost = document.getElementById("items-lost");
+    // bar chart height calcs for items won/lost
+    const winCount = 13;
+    const loseCount = 26;
+    if ( winCount > loseCount ) {
+      items_won.style.height = '100%';
+      items_lost.style.height = `calc( ( ${loseCount} / ${winCount} ) * 100% )`
+    }
+    else {
+      items_lost.style.height = '100%';
+      items_won.style.height = `calc( ( ${winCount} / ${loseCount} ) * 100% )`
+    };
+    /*
+    if ( {{ custom_attribute.${2024_items_won} }} > {{ custom_attribute.${2024_items_lost} }} ) {
+      items_won.style.height = '100%';
+      items_lost.style.height = 'calc( ( {{ custom_attribute.${2024_items_lost} }} / {{ custom_attribute.${2024_items_won} }} ) * 100% )'
+    }
+    else {
+      items_lost.style.height = '100%';
+      items_won.style.height = 'calc( ( {{ custom_attribute.${2024_items_won} }} / {{ custom_attribute.${2024_items_lost} }} ) * 100% )'
+    };
+    */
   </script>
   <!-- <script>
     // Swipe functionality for mobile
