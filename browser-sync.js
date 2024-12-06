@@ -5,7 +5,7 @@ let nodemon;
 
 // Start Browsersync and proxy the Express app
 browserSync.init({
-  proxy: "http://localhost:3000", // Your Express server
+  proxy: `http://localhost:2999`, // Your Express server
   files: ["app.js", "views/**/*.*", "public/**/*.*"], // Watch these files for changes
   port: 4000, // Browsersync runs on a different port
   open: false, // true: Automatically open the browser
