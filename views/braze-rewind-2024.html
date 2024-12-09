@@ -302,6 +302,9 @@
       .carousel-item[data-index="9"] {
         background-image: url("rewind_2024_9.png");
       }
+      .carousel-item[data-index="10"] {
+        background-image: url("rewind_2024_summary.png");
+      }
 
       .content-wrapper {
         width: max-content;
@@ -313,9 +316,16 @@
         right: 15px;
         top: 31%;
       }
-      #dollars-saved {
+
+      [data-index="2"] .dollars-saved {
         left: 15px;
         top: 55.5%;
+      }
+      [data-index="10"] .dollars-saved {
+        top: 21%;
+        left: 50%;
+        transform: translateX(-50%);
+        text-align: center;
       }
 
       .top-savings-images-container {
@@ -468,18 +478,24 @@
         bottom: 7%;
       }
 
-      #best-bid {
+      [data-index="7"] .best-bid,
+      [data-index="10"] .best-bid {
         aspect-ratio: 1;
         width: 71%;
         top: 45%;
         right: 30px;
         outline: 10px solid var(--gold);
       }
-      #best-bid img {
-        position: absolute;
+      [data-index="10"] .best-bid {
+        width: 60%;
+        top: unset;
+        bottom: 20%;
+        left: 50%;
+        transform: translateX(-50%);
       }
 
-      .gold-circle {
+      [data-index="7"] .gold-circle,
+      [data-index="10"] .gold-circle {
         width: 150px;
         aspect-ratio: 1;
         position: absolute;
@@ -501,7 +517,8 @@
         margin-left: -5px;
       }
 
-      .green-circle {
+      [data-index="7"] .green-circle,
+      [data-index="10"] .green-circle {
         width: 140px;
         aspect-ratio: 1;
         position: absolute;
@@ -516,10 +533,29 @@
         background-size: cover;
         background-repeat: no-repeat;
       }
+      [data-index="10"] .green-circle {
+        right:-65px;
+      }
       .green-circle p {
         font-size: 40px;
         margin-top: 25px;
         margin-left: -5px;
+      }
+
+      [data-index="7"] .blue-ribbon,
+      [data-index="10"] .blue-ribbon {
+        width: 60%;
+        aspect-ratio: 1;
+        position: absolute;
+        top: -12px;
+        right: -11px;
+        background-image: url("blue-ribbon.png");
+        background-size: cover;
+        background-repeat: no-repeat;
+      }
+      [data-index="10"] .blue-ribbon {
+        width: 70%;
+        top: -11px;
       }
 
       #top-bidding-day {
@@ -547,6 +583,23 @@
         display: block;
         width: 45px;
         aspect-ratio: 1;
+      }
+
+      #summary-content {
+        width: 100%;
+        height: 100%;
+        transform: none;
+      }
+
+      #summary-header {
+        width: 100%;
+        position: absolute;
+        top: 47px;
+        left: 50%;
+        transform: translateX(-50%);
+        font-size: 42px;
+        line-height: 1;
+        text-align: center;
       }
 
       /* CONTENT STYLES */
@@ -647,24 +700,24 @@
             <!-- <div class="progress-token" style="opacity: 0.4; background-color: var(--gold)"></div> -->
             <div class="progress-token" style="transform: translateX(375px)" data-index="2"></div>
 
-{% if custom_attribute.${2024_savings_1_image} != blank or
-            custom_attribute.${2024_savings_2_image} != blank or
-            custom_attribute.${2024_savings_3_image} != blank or
-            custom_attribute.${2024_savings_4_image} != blank or
-            custom_attribute.${2024_savings_5_image} != blank %}
+{% if custom_attribute.${top_savings_image_1} != blank or
+            custom_attribute.${top_savings_image_2} != blank or
+            custom_attribute.${top_savings_image_3} != blank or
+            custom_attribute.${top_savings_image_4} != blank or
+            custom_attribute.${top_savings_image_5} != blank %}
             <div class="progress-token" style="transform: translateX(375px)" data-index="3"></div>
 
 {% endif %}
             <div class="progress-token" style="transform: translateX(375px)" data-index="4"></div>
 
-{% if custom_attribute.${2024_category_1_name} != blank %}
+{% if custom_attribute.${category_name_1} != blank %}
             <div class="progress-token" style="transform: translateX(375px)" data-index="5"></div>
 
 {% endif %}
             <div class="progress-token" style="transform: translateX(375px)" data-index="6"></div>
             <div class="progress-token" style="transform: translateX(375px)" data-index="7"></div>
 
-{% if custom_attribute.${2024_top_1_warehouse} != blank} %}
+{% if custom_attribute.${top_warehouse_1} != blank} %}
             <div class="progress-token" style="transform: translateX(375px)" data-index="8"></div>
 
 {% endif %}
@@ -682,8 +735,8 @@
                 <p class="data uppercase">TOP 3</p>
                 <p class="caption uppercase">PERCENTILE IN<br />BIDDERS</p>
               </div>
-              <div id="dollars-saved" class="content-wrapper">
-                <p class="data uppercase"><sup>$</sup>{{custom_attribute.${2024_dollars_saved}}}</p>
+              <div class="dollars-saved content-wrapper">
+                <p class="data uppercase"><sup>$</sup>{{custom_attribute.${dollars_saved}}}</p>
                 <p class="caption uppercase">Dollars<br />Saved</p>
               </div>
             </div>
@@ -691,30 +744,30 @@
             <!-- Image 3 -->
 
 
-{% if custom_attribute.${2024_savings_1_image} != blank or
-            custom_attribute.${2024_savings_2_image} != blank or
-            custom_attribute.${2024_savings_3_image} != blank or
-            custom_attribute.${2024_savings_4_image} != blank or
-            custom_attribute.${2024_savings_5_image} != blank %}
+{% if custom_attribute.${top_savings_image_1} != blank or
+            custom_attribute.${top_savings_image_2} != blank or
+            custom_attribute.${top_savings_image_3} != blank or
+            custom_attribute.${top_savings_image_4} != blank or
+            custom_attribute.${top_savings_image_5} != blank %}
             <div class="carousel-item" data-index="3">
               <div class="top-savings-images-container">
 
-{% if custom_attribute.${2024_savings_1_image} != blank or
-                custom_attribute.${2024_savings_2_image} != blank %}
+{% if custom_attribute.${top_savings_image_1} != blank or
+                custom_attribute.${top_savings_image_2} != blank %}
 
                 <div class="top-savings-left-col">
 
-{% if custom_attribute.${2024_savings_1_image} != blank %}
+{% if custom_attribute.${top_savings_image_1} != blank %}
                   <div data-item-id="1" class="top-savings-item">
-                    <img src="{{custom_attribute.${2024_savings_1_image}}}" alt="null" />
+                    <img src="{{custom_attribute.${top_savings_image_1}}}" alt="null" />
                   </div>
 
 
 {% endif %}
 
-{% if custom_attribute.${2024_savings_2_image} != blank %}
+{% if custom_attribute.${top_savings_image_2} != blank %}
                   <div data-item-id="2" class="top-savings-item">
-                    <img src="{{custom_attribute.${2024_savings_2_image}}}" alt="null" />
+                    <img src="{{custom_attribute.${top_savings_image_2}}}" alt="null" />
                   </div>
 
 
@@ -724,30 +777,30 @@
 
 {% endif %}
 
-{% if custom_attribute.${2024_savings_3_image} != blank or
-                custom_attribute.${2024_savings_4_image} != blank or
-                custom_attribute.${2024_savings_5_image} != blank %}
+{% if custom_attribute.${top_savings_image_3} != blank or
+                custom_attribute.${top_savings_image_4} != blank or
+                custom_attribute.${top_savings_image_5} != blank %}
 
                 <div class="top-savings-right-col">
 
-{% if custom_attribute.${2024_savings_3_image} != blank %}
+{% if custom_attribute.${top_savings_image_3} != blank %}
                   <div data-item-id="3" class="top-savings-item">
-                    <img src="{{custom_attribute.${2024_savings_3_image}}}" alt="null" />
+                    <img src="{{custom_attribute.${top_savings_image_3}}}}}}" alt="null" />
                   </div>
 
 
 {% endif %}
 
-{% if custom_attribute.${2024_savings_4_image} != blank %}
+{% if custom_attribute.${top_savings_image_4} != blank %}
                   <div data-item-id="4" class="top-savings-item">
-                    <img src="{{custom_attribute.${2024_savings_4_image}}}_image}}}" alt="null" />
+                    <img src="{{custom_attribute.${top_savings_image_4}}}_image}}}" alt="null" />
                   </div>
 
 {% endif %}
 
-{% if custom_attribute.${2024_savings_5_image} != blank %}
+{% if custom_attribute.${top_savings_image_5} != blank %}
                   <div data-item-id="5" class="top-savings-item">
-                    <img src="{{custom_attribute.${2024_savings_5_image}}}" alt="null" />
+                    <img src="{{custom_attribute.${top_savings_image_5}}}" alt="null" />
                   </div>
 
 
@@ -767,11 +820,11 @@
               <div id="win-loss-chart" class="content-wrapper">
                 <div class="graph-wrapper vertical chart-background">
                   <div id="items-won" class="chart-bar vertical bg-green">
-                    <span class="bid-win-loss-count">{{ custom_attribute.${2024_items_won} }}</span>
+                    <span class="bid-win-loss-count">{{ custom_attribute.${items_won} }}</span>
                   </div>
                   <div id="items-lost" class="chart-bar vertical bg-gold">
                     <span class="bid-win-loss-count"
-                      >{{ custom_attribute.${2024_items_lost} }}</span
+                      >{{ custom_attribute.${items_lost} }}</span
                     >
                   </div>
                 </div>
@@ -781,62 +834,62 @@
             <!-- Image 5 -->
 
 
-{% if custom_attribute.${2024_category_1_name} != blank %}
+{% if custom_attribute.${category_wins_1} != blank %}
             <div class="carousel-item" data-index="5">
               <div id="category-chart" class="content-wrapper">
                 <div class="graph-wrapper horizontal">
                   <div class="chart-bar horizontal bg-green" style="width: 100%">
                     <span class="category-name"
-                      >{{ custom_attribute.${2024_category_1_name} }}</span
+                      >{{ custom_attribute.${category_name_1} }}</span
                     >
                     <span class="category-count"
-                      >{{ custom_attribute.${2024_category_1_wins} }}</span
+                      >{{ custom_attribute.${category_wins_1} }}</span
                     >
                   </div>
 
 
-{% if custom_attribute.${2024_category_2_wins} != blank %}
+{% if custom_attribute.${category_wins_2} != blank %}
                   <div
                     class="chart-bar horizontal bg-gold"
-                    style="width: calc(( {{ custom_attribute.${2024_category_2_wins} }} / {{ custom_attribute.${2024_category_1_wins} }} ) * 100%)"
+                    style="width: calc(( {{ custom_attribute.${category_wins_2} }} / {{ custom_attribute.${category_wins_1} }} ) * 100%)"
                   >
                     <span class="category-name"
-                      >{{ custom_attribute.${2024_category_2_name} }}</span
+                      >{{ custom_attribute.${category_name_2} }}</span
                     >
                     <span class="category-count"
-                      >{{ custom_attribute.${2024_category_2_wins} }}</span
+                      >{{ custom_attribute.${category_wins_2} }}</span
                     >
                   </div>
 
 
 {% endif %}
 
-{% if custom_attribute.${2024_category_3_wins} != blank %}
+{% if custom_attribute.${category_wins_3} != blank %}
                   <div
                     class="chart-bar horizontal bg-red"
-                    style="width: calc(( {{ custom_attribute.${2024_category_3_wins} }} / {{ custom_attribute.${2024_category_1_wins} }} ) * 100%)"
+                    style="width: calc(( {{ custom_attribute.${category_wins_3} }} / {{ custom_attribute.${category_wins_1} }} ) * 100%)"
                   >
                     <span class="category-name"
-                      >{{ custom_attribute.${2024_category_3_name} }}</span
+                      >{{ custom_attribute.${category_name_3} }}</span
                     >
                     <span class="category-count"
-                      >{{ custom_attribute.${2024_category_3_wins} }}</span
+                      >{{ custom_attribute.${category_wins_3} }}</span
                     >
                   </div>
 
 
 {% endif %}
 
-{% if custom_attribute.${2024_category_4_wins} != blank %}
+{% if custom_attribute.${category_wins_4} != blank %}
                   <div
                     class="chart-bar horizontal bg-blue"
-                    style="width: calc(( {{ custom_attribute.${2024_category_4_wins} }} / {{ custom_attribute.${2024_category_1_wins} }} ) * 100%)"
+                    style="width: calc(( {{ custom_attribute.${category_wins_4} }} / {{ custom_attribute.${category_wins_1} }} ) * 100%)"
                   >
                     <span class="category-name"
-                      >{{ custom_attribute.${2024_category_4_name} }}</span
+                      >{{ custom_attribute.${category_name_4} }}</span
                     >
                     <span class="category-count"
-                      >{{ custom_attribute.${2024_category_4_wins} }}</span
+                      >{{ custom_attribute.${category_wins_4} }}</span
                     >
                   </div>
 
@@ -852,43 +905,52 @@
             <!-- Image 6 -->
             <div class="carousel-item" data-index="6">
               <div id="dollar-bids" class="content-wrapper text-center">
-                <p class="data uppercase">{{ custom_attribute.${2024_dollar_items_won} }}</p>
+                <p class="data uppercase">{{ custom_attribute.${dollar_items_won} }}</p>
                 <p class="caption uppercase">$1 WINS</p>
               </div>
+
+<!--
+{% if custom_attribute.${win_percentage} < 0 %}
+-->
               <div id="percent-wins" class="content-wrapper text-center">
-                <p class="data uppercase">{{ custom_attribute.${2024_win_percentage} }}%</p>
+                <p class="data uppercase">{{ custom_attribute.${win_percentage} }}%</p>
                 <p class="caption uppercase">WINNINGS</p>
               </div>
+
+<!--
+{% endif %}
+-->
               <div id="most-bids-on-item" class="content-wrapper text-center">
-                <p class="data uppercase">{{ custom_attribute.${2024_most_bids_on_single_lot} }}</p>
+                <p class="data uppercase">{{ custom_attribute.${most_bids_on_item} }}</p>
                 <p class="caption uppercase">MOST BIDS<br />PLACED ON A<br />SINGLE ITEM</p>
               </div>
               <div id="unique-bids" class="content-wrapper text-center">
-                <p class="data uppercase">{{ custom_attribute.${2024_unique_bid_items} }}</p>
+                <p class="data uppercase">{{ custom_attribute.${unique_bid_items} }}</p>
                 <p class="caption uppercase">UNIQUE BIDS</p>
               </div>
             </div>
 
             <!-- Image 7 -->
             <div class="carousel-item" data-index="7">
-              <div id="best-bid" class="content-wrapper">
+              <div class="best-bid content-wrapper">
 
-{% if custom_attribute.${2024_savings_1_image} != blank %}
-                <img src="{{custom_attribute.${2024_savings_1_image}}}" alt="null" />
+{% if custom_attribute.${top_savings_image_1} != blank %}
+                <img src="{{custom_attribute.${top_savings_image_1}}}" alt="null" />
 
 {% else %}
                 <img src="macbid_logo.png" alt="null" />
 
 {% endif %}
                 <div class="gold-circle">
-                  <p><sup>$</sup>{{custom_attribute.${2024_savings_top_item_retail_price}}}</p>
+                  <p><sup>$</sup>{{custom_attribute.${top_savings_item_retail_price}}}</p>
                 </div>
                 <div class="green-circle">
-                  <p><sup>$</sup>{{custom_attribute.${2024_savings_top_item_win_price}}}</p>
+                  <p><sup>$</sup>{{custom_attribute.${top_savings_item_win_price}}}</p>
                 </div>
+                <div class="blue-ribbon"></div>
               </div>
               <div id="top-bidding-day" class="content-wrapper text-center">
-                <p class="data">{{custom_attribute.${2024_top_bidding_day_of_week}}}</p>
+                <p class="data">{{custom_attribute.${top_bidding_day}}}</p>
                 <p class="caption uppercase">TOP BIDDING DAY</p>
               </div>
             </div>
@@ -896,20 +958,20 @@
             <!-- Image 8 -->
 
 
-{% if custom_attribute.${2024_top_1_warehouse} != blank} %}
+{% if custom_attribute.${top_warehouse_1} != blank} %}
             <div class="carousel-item" data-index="8">
               <div id="top-warehouses" class="content-wrapper">
-                <p>{{ custom_attribute.${2024_top_1_warehouse} }}</p>
+                <p>{{ custom_attribute.${top_warehouse_1} }}</p>
 
 
-{% if custom_attribute.${2024_top_2_warehouse} != blank %}
-                <p>{{ custom_attribute.${2024_top_2_warehouse} }}</p>
+{% if custom_attribute.${top_warehouse_2} != blank %}
+                <p>{{ custom_attribute.${top_warehouse_2} }}</p>
 
 
 {% endif %}
 
-{% if custom_attribute.${2024_top_3_warehouse} != blank %}
-                <p>{{ custom_attribute.${2024_top_3_warehouse} }}</p>
+{% if custom_attribute.${top_warehouse_3} != blank %}
+                <p>{{ custom_attribute.${top_warehouse_3} }}</p>
 
 
 {% endif %}
@@ -927,6 +989,32 @@
                 <a href="#" class="social-button" data-network="linkedin"></a>
                 <a href="#" class="social-button" data-network="youtube"></a>
                 <a href="#" class="social-button" data-network="tiktok"></a>
+              </div>
+            </div>
+
+            <!-- Image 10: Summary Slide -->
+            <div class="carousel-item" data-index="10" id="summary-slide">
+              <div id="summary-content" class="content-wrapper">
+                <p id="summary-header">M@C Bid<br />Rewind 2024</p>
+                <div class="dollars-saved content-wrapper">
+                  <p class="data uppercase"><sup>$</sup>{{custom_attribute.${dollars_saved}}}</p>
+                  <p class="caption uppercase">Dollars&nbsp;&nbsp;Saved</p>
+                </div>
+                <div class="best-bid content-wrapper">
+
+{% if custom_attribute.${top_savings_image_1} != blank %}
+                  <img src="{{custom_attribute.${top_savings_image_1}}}" alt="null" />
+{% else %}
+                  <img src="macbid_logo.png" alt="null" />
+{% endif %}
+                  <div class="gold-circle">
+                  <p><sup>$</sup>{{custom_attribute.${top_savings_item_retail_price}}}</p>
+                </div>
+                <div class="green-circle">
+                  <p><sup>$</sup>{{custom_attribute.${top_savings_item_win_price}}}</p>
+                </div>
+                <div class="blue-ribbon"></div>
+                </div>
               </div>
             </div>
           </div>
@@ -965,16 +1053,16 @@
     });
   </script>
   <script>
-    const items_won = document.getElementById('items-won');
-    const items_lost = document.getElementById('items-lost');
+    const itemsWon = document.getElementById('items-won');
+    const itemsLost = document.getElementById('items-lost');
     // bar chart height calcs for items won/lost
-    if ( {{ custom_attribute.${2024_items_won} }} > {{ custom_attribute.${2024_items_lost} }} ) {
-      items_won.style.height = '100%';
-      items_lost.style.height = 'calc( ( {{ custom_attribute.${2024_items_lost} }} / {{ custom_attribute.${2024_items_won} }} ) * 100% )'
+    if ( {{ custom_attribute.${items_won} }} > {{ custom_attribute.${items_lost} }} ) {
+      itemsWon.style.height = '100%';
+      itemsLost.style.height = 'calc( ( {{ custom_attribute.${items_lost} }} / {{ custom_attribute.${items_won} }} ) * 100% )'
     }
     else {
-      items_lost.style.height = '100%';
-      items_won.style.height = 'calc( ( {{ custom_attribute.${2024_items_won} }} / {{ custom_attribute.${2024_items_lost} }} ) * 100% )'
+      itemsLost.style.height = '100%';
+      itemsWon.style.height = 'calc( ( {{ custom_attribute.${items_won} }} / {{ custom_attribute.${items_lost} }} ) * 100% )'
     };
   </script>
   <!-- <script>
